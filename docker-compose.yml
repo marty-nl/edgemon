@@ -2,19 +2,19 @@ version: '3.3'
 
 services:
   influxdb:
-    image: marty-nl/influx-telegraf
+    image: marty-nl/influx-telegraf:1.01
     build: ./build
     restart: always
     command: ['/usr/bin/influxd']
     entrypoint: ['/entrypoint.sh']
     environment:
-      - INFLUX_PASS=CHANGEME
-      - INFLUX_ADMINPASS=CHANGEME
+      - INFLUX_PASS=${INFLUX_PASS}
+      - INFLUX_ADMINPASS=${INFLUX_ADMINPASS}
     volumes:
       - influxdb:/var/lib/influxdb
 
   telegraf:
-    image: marty-nl/influx-telegraf
+    image: marty-nl/influx-telegraf:1.01
     build: ./build
     restart: always
     depends_on: 
